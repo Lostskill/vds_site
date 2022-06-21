@@ -1,0 +1,14 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>VDS - Магазин по продажам видеокарт</title>
+    <div class="main">
+        {% for card in videocard %}
+        <h2>{{ card.name }}</h2>
+        <p>{{ card.description }}</p>
+        <p>{{ card.amount }}</p>
+        <p>{{ card.price }}</p>
+        {% endfor %}
+        
+    </div>
