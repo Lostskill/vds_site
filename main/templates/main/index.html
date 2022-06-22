@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <title>VDS - Магазин по продажам видеокарт</title>
+</head>
+    <div class = "menu">
+        {% for rub in rubs %}
+        <h2>{{ rub.name }}</h2>
+        {% endfor %}
+    </div>
+
     <div class="main">
         {% for card in videocard %}
         <h2>{{ card.name }}</h2>
@@ -12,3 +19,4 @@
         {% endfor %}
         
     </div>
+</html>

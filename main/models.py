@@ -17,6 +17,8 @@ class VideoCard(models.Model):
     rub_key = models.ForeignKey('Rub', null=True, on_delete = models.PROTECT, verbose_name="Тип Видеокарты")
     image = models.ImageField(null=True)
 
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'ВидеоКарта'
@@ -27,3 +29,7 @@ class Rub(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta: 
+        verbose_name = 'Категория'
+        ordering = ['id']
