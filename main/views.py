@@ -20,3 +20,6 @@ class Main(DataMixin, ListView,):
         return dict(list(context.items()) + list(c_def.items()))
     #def get_queryset(self):
     #    return super().get_queryset().filter(user_id=self.request.user.id)
+
+class RubList(ListView):
+    model = VideoCard

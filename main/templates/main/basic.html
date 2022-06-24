@@ -1,0 +1,16 @@
+<!DOCTYPE>
+<html lang="ru">
+    <body>
+        <meta charset="utf-8"/>
+        <title>VDS - Магазин по продажам видеокарт</title>
+        <div class = "menu">
+            {% for rub in rubs %}
+            <h2>{{ rub.name }}</h2>
+            {% endfor %}
+        </div>
+        <div>
+            {% block content  %}
+            {% endblock  %} 
+        </div>
+    </body>
+</html>
