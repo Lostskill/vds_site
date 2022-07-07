@@ -1,5 +1,5 @@
 from .models import *
-from django.db.models import Count
+
 
 class DataMixin:
 
@@ -7,5 +7,6 @@ class DataMixin:
         context = kwargs
         rubs = Rub.objects.all()
         context['rubs'] = rubs
-
+        if 'rub_selected' not in context:
+            context['rub_selected'] = 0
         return context

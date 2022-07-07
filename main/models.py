@@ -1,6 +1,7 @@
 from email.mime import image
 from unicodedata import name
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -16,9 +17,13 @@ class VideoCard(models.Model):
     amount = models.FloatField(null=True)
     rub_key = models.ForeignKey('Rub', null=True, on_delete = models.PROTECT, verbose_name="Тип Видеокарты")
     image = models.ImageField(null=True)
-
+    slug = models.SlugField(max_length=255,null=True,  db_index=True, verbose_name="URL")
+    
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('vcard', kwargs= {'card_slug': self.slug})
 
     class Meta:
         verbose_name = 'ВидеоКарта'
@@ -26,10 +31,16 @@ class VideoCard(models.Model):
 
 class Rub(models.Model):
     name = models.CharField(max_length=20, db_index = True, verbose_name = 'название')
-
+    slug_field = models.SlugField(max_length=255, null=True, db_index=True, verbose_name="URL")
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('rubrics', kwargs= {'cat_slug': self.slug_field})
+    
     class Meta: 
         verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
         ordering = ['id']
+
+    

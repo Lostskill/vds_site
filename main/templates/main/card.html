@@ -1,0 +1,17 @@
+{% extends 'main/basic.html' %}
+
+{% block content %}
+<h1>{{ card.name }}</h1>
+<h2>{{ card.description }}</h2>
+<p>{{ card.amount }}</p>
+<p>{{ card.price }}</p>
+<a>{{card.video_memory}}</a>
+<a>{{card.manufacturer}}</a>
+
+{% if card.img %}
+<div>
+    {{ card.img }}
+</div>
+
+{% endif %}
+{% endblock %}

@@ -6,6 +6,7 @@
         <p>{{ card.description }}</p>
         <p>{{ card.amount }}</p>
         <p>{{ card.price }}</p>
+        <a href={{ card.get_absolute_url }}>Открыть</a>
         {% endfor %}
         
     </div>

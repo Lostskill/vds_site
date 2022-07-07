@@ -1,0 +1,7 @@
+            {% for rub in rubs %}
+                {% if rub.pk == rub_selected %}
+                    <li class = "selected">{{rub.name}}</li>
+                {% else %}
+                    <li><a href ="{{ rub.get_absolute_url }}">{{rub.name}}</a></li>
+                {% endif %}        
+            {% endfor %}
