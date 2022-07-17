@@ -4,14 +4,21 @@
 <h1>{{ card.name }}</h1>
 <h2>{{ card.description }}</h2>
 <p>{{ card.amount }}</p>
-<p>{{ card.price }}</p>
 <a>{{card.video_memory}}</a>
 <a>{{card.manufacturer}}</a>
 
-{% if card.img %}
+<p class="price">${{ card.price }}</p>
+		<form action="{% url "cart:cart_add" card.id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+    <input type="submit" value="Add to cart">
+</form>
+
 <div>
+    {% if card.img %}
     {{ card.img }}
+    {% endif %}
 </div>
 
-{% endif %}
+
 {% endblock %}

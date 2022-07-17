@@ -1,10 +1,5 @@
-from email.mime import image
-from unicodedata import name
 from django.db import models
 from django.urls import reverse
-
-# Create your models here.
-
 
 class VideoCard(models.Model):
     name = models.CharField(max_length= 100, )
@@ -17,8 +12,7 @@ class VideoCard(models.Model):
     amount = models.FloatField(null=True)
     rub_key = models.ForeignKey('Rub', null=True, on_delete = models.PROTECT, verbose_name="Тип Видеокарты")
     image = models.ImageField(null=True)
-    slug = models.SlugField(max_length=255,null=True,  db_index=True, verbose_name="URL")
-    
+    slug = models.SlugField(max_length=255,null=True,  db_index=True, verbose_name="URL")   
     def __str__(self):
         return self.title
 
@@ -26,8 +20,10 @@ class VideoCard(models.Model):
         return reverse('vcard', kwargs= {'card_slug': self.slug})
 
     class Meta:
+        index_together = (('id','slug'),)
         verbose_name = 'ВидеоКарта'
-        verbose_name_plural = 'ВидеоКарты'
+        verbose_name_plural = 'Видеокарты'
+
 
 class Rub(models.Model):
     name = models.CharField(max_length=20, db_index = True, verbose_name = 'название')
