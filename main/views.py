@@ -1,16 +1,16 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth import logout, login
+from django.contrib.auth import login
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView ,CreateView
 from main.models import *
 from django.contrib.auth.views import LoginView
 from .utils import *
 from .form import *
-from cart.forms import CartAddProductForm
-# Create your views here.W
+from cart.cart import Cart
 
 
-class Main(DataMixin, ListView,):
+class Main(DataMixin, ListView):
+
     model = VideoCard
     
     template_name = 'main/index.html'
@@ -20,6 +20,8 @@ class Main(DataMixin, ListView,):
     def get_context_data(self,*,objects_list=None,**kwargs): 
         context = super().get_context_data(**kwargs) 
         c_def = self.get_rub_data()
+
+        
         return dict(list(context.items()) + list(c_def.items()))
     #    return context
     #def get_queryset(self):

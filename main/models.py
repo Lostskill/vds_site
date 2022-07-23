@@ -14,7 +14,7 @@ class VideoCard(models.Model):
     image = models.ImageField(null=True)
     slug = models.SlugField(max_length=255,null=True,  db_index=True, verbose_name="URL")   
     def __str__(self):
-        return self.title
+        return self.name
 
     def get_absolute_url(self):
         return reverse('vcard', kwargs= {'card_slug': self.slug})

@@ -24,6 +24,18 @@
                 {% endif %}        
             {% endfor %}
         </div>
+        
+        <div class="cart">
+    {% with total_items=cart|length %}
+
+            <a href="{% url "cart:cart_detail" %}">
+                {{ total_items }} item{{ total_items|pluralize }},
+                ${{ cart.get_total_price }}
+            </a>
+
+    {% endwith %}
+</div>
+        
         <div>
             {% block content  %}
             {% endblock  %} 

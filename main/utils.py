@@ -1,3 +1,5 @@
+
+from cart.cart import Cart
 from .models import *
 from cart.forms import CartAddProductForm
 
@@ -19,3 +21,9 @@ class DataMixin:
         cart_product_form = CartAddProductForm()
         context['cart_product_form'] = cart_product_form
         return context
+
+#    def get_cart_data(self, request,**kwargs):
+#        cart = Cart(request)
+#        con = kwargs
+#        con['cart'] = cart
+#        return con
