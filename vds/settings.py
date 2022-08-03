@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'cart',
-    'orders'
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +135,10 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+
+CELERY_BROKER_URL = 'redis://redis:6379'

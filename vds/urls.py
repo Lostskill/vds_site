@@ -17,13 +17,13 @@ from argparse import Namespace
 from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
-from django.conf.urls import url
+#from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
     path('cart/', include(('cart.urls', 'cart'), namespace = 'cart')),
-    url(r'^orders/', include(('orders.urls', 'orders'), namespace='orders')),
+    path('orders/', include(('orders.urls', 'orders'), namespace='orders')),
     
 ]
 
