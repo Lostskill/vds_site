@@ -1,9 +1,6 @@
 from django.core.mail import send_mail
 from .models import Order
 from celery import shared_task
-#import requests as r
-#from django.conf import settings
-#import uuid
 
 @shared_task
 def order_created(order_id):
@@ -20,4 +17,3 @@ def order_created(order_id):
                           'admin@myshop.com',
                           [order.email])
     return mail_sent
-

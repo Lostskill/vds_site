@@ -1,13 +1,12 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
-from . import tasks
+from .tasks import order_created
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
 from .models import Order
-from celery import shared_task
+
 
 @staff_member_required
 def admin_order_detail(request, order_id):
@@ -31,7 +30,7 @@ def order_create(request):
             # очистка корзины
             cart.clear()
             # запуск асинхронной задачи
-            tasks.order_created.delay(order.id)
+            order_created(order.id)
             return render(request, 'orders/order/created.html',
                           {'order': order})
     else:
@@ -39,10 +38,4 @@ def order_create(request):
     return render(request, 'orders/order/create.html',
                   {'cart': cart, 'form': form})
 
-def num(request):
-    if request: 
-        tasks.download_a_cat.delay()
-        print('работает')
-        return HttpResponse('<h1>работает</h1>')
-    else:
-        return HttpResponse('<h1>не работает</h1>')
+
