@@ -6,10 +6,21 @@ from main.models import *
 from django.contrib.auth.views import LoginView
 from .utils import *
 from .form import *
-from cart.cart import Cart
+from django.db.models import Q
+
+class SortingStaff:
+
+    def get_chip(self):
+        return VideoCard.objects.filter().values("chip").distinct()
+    
+    def get_manufactors(self):
+        return VideoCard.objects.filter().values("manufacturer").distinct()
+
+    def get_videomemory(self):
+        return VideoCard.objects.filter().values("video_memory").distinct()
 
 
-class Main(DataMixin, ListView):
+class Main(SortingStaff ,DataMixin, ListView):
 
     model = VideoCard
     
@@ -83,6 +94,20 @@ class RegisterUser(DataMixin, CreateView):
         login(self.request, user)
         return redirect('main')
 
+class FilterCard(SortingStaff,ListView,DataMixin):
+    template_name = 'main/index.html'
+    
+    def get_queryset(self):
+        queryset = VideoCard.objects.filter(
+            Q(chip__in=self.request.GET.getlist('chip')) |
+            Q(manufacturer__in=self.request.GET.getlist('manufacturer'))|
+            Q(video_memory__in=self.request.GET.getlist('video_memory')))
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_rub_data()
+        return dict(list(context.items()) + list(c_def.items()))
 
 def about(request):
         return render(request, 'main/about', {'menu': menu})

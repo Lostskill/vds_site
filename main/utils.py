@@ -22,8 +22,3 @@ class DataMixin:
         context['cart_product_form'] = cart_product_form
         return context
 
-#    def get_cart_data(self, request,**kwargs):
-#        cart = Cart(request)
-#        con = kwargs
-#        con['cart'] = cart
-#        return con

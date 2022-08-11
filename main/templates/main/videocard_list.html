@@ -1,0 +1,12 @@
+{% extends 'main/basic.html' %}
+{% block content %}
+
+<div>
+    {%for i in queryset%}
+        <li>
+        {{i}}
+        </li>
+        {%endfor%}
+    </div>
+
+{% endblock %}

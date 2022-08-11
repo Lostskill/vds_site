@@ -6,9 +6,10 @@ from . import views
 
 urlpatterns = [
     path('', Main.as_view(), name='main'),
+    path('filter/', views.FilterCard.as_view() ,name = 'filter'),
     path('category/<slug:cat_slug>/', RubList.as_view() ,name = 'rubrics'),
     path('card/<slug:card_slug>', ShowCard.as_view(), name = 'vcard'),
     path('about/', views.about , name = 'about'),
     path('login/', LoginUser.as_view() ,name = 'login'),
-    path('register/', RegisterUser.as_view() ,name = 'register'),
+    path('register/', RegisterUser.as_view() ,name = 'register'),   
 ]

@@ -1,13 +1,49 @@
 {% extends 'main/basic.html' %}
 {% block content %}    
+    <div class='sort'>
+        <form action='{% url 'filter' %}' method='get'>
+            <div class='chip_header'>   
+                <p>Графический процессор</p>
+                {% for chips in view.get_chip %}
+                    <li class='chip_sort'>
+                    <input type='checkbox' class='checked' name='chip' value="{{ chips.chip }}">
+                    <span class='span chip_sort'>{{ chips.chip }} </span>
+                {% endfor %}
+            </div>        
+            <p>Производитель</p>
+        {% for manu in view.get_manufactors %}
+            <li class='manu_sort'>
+                <input type='checkbox' class='checked' name='manufacturer' value="{{ manu.manufacturer}}">
+                <span class='span chip_sort'>{{ manu.manufacturer }} </span>
+        {% endfor %}
+
+        <p>Видеопамять</p>
+        {% for vmemory in view.get_videomemory %}
+            <li class='chip_sort'>
+                <input type='checkbox' class='checked' name='video_memory' value="{{ vmemory.video_memory }}">
+                <span class='span chip_sort'>{{ vmemory.video_memory }} </span>
+        {% endfor %}    
+            <button type='submit'>Найти</button>
+        </form>
+    </div>
+
+<div class = 'sorting_card'>
+    {%for cards in videocard_list %}
+        <h2>{{ cards.name }}</h2>
+        <p>{{ cards.description }}</p>
+        <p>{{ cards.amount }}</p>
+        <p>{{ cards.price }}</p>
+        <a href={{ cards.get_absolute_url }}>Открыть</a>
+    {% endfor %}
+<div>
+
 <div class="main">
-        {% for card in videocard %}
+    {% for card in videocard %}
         <h2>{{ card.name }}</h2>
         <p>{{ card.description }}</p>
         <p>{{ card.amount }}</p>
         <p>{{ card.price }}</p>
         <a href={{ card.get_absolute_url }}>Открыть</a>
-        {% endfor %}
-        
-    </div>
+     {% endfor %}
+</div>
 {% endblock %}

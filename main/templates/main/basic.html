@@ -1,8 +1,12 @@
+{% load static %}
 <!DOCTYPE>
 <html lang="ru">
     <body>
         <meta charset="utf-8"/>
-        <title>VDS - Магазин по продажам видеокарт</title>
+        <head>
+            <title>VDS - Магазин по продажам видеокарт</title>
+            <link type="text/css" href="{% static 'main/css/style.css' %}" rel="stylesheet"/>
+        </head>
         <div class = "menu">
         {% block menu %}
             <div class = 'mainmenu'>

@@ -7,11 +7,11 @@ class VideoCard(models.Model):
     chip = models.CharField(max_length=100)
     price = models.FloatField()
     video_memory = models.FloatField(null=True, blank=True)
-    description = models.TextField( null=True)
+    description = models.TextField(null=True)
     published = models.DateTimeField(auto_now_add=True, db_index=True)
     amount = models.FloatField(null=True)
     rub_key = models.ForeignKey('Rub', null=True, on_delete = models.PROTECT, verbose_name="Тип Видеокарты")
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True,blank=True)
     slug = models.SlugField(max_length=255,null=True,  db_index=True, verbose_name="URL")   
     def __str__(self):
         return self.name
