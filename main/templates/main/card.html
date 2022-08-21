@@ -7,13 +7,14 @@
 <a>{{card.video_memory}}</a>
 <a>{{card.manufacturer}}</a>
 
-<p class="price">${{ card.price }}</p>
-		<form action="{% url "cart:cart_add" card.id %}" method="post">
-    {{ cart_product_form }}
-    {% csrf_token %}
-    <input type="submit" value="Add to cart">
-</form>
-
+<div class="info">
+    <p class="price">${{ card.price }}</p>
+            <form action="{% url "cart:cart_add" card.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+            </form>
+</div>
 <div>
     {% if card.img %}
     {{ card.img }}
