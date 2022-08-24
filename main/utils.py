@@ -1,10 +1,10 @@
 from .models import *
 from cart.forms import CartAddProductForm
 
-menu = [{'title': "О сайте", 'url_name': 'about'},
+menu = [{'title':'Главная', 'url_name': 'main'},
+        {'title': "О сайте", 'url_name': 'about'},
         {'title': "Войти", 'url_name': 'login'},
-        {'title': "Регистрация", 'url_name': 'register'},
-        {'title': "Главная страница", 'url_name': 'main'}
+        {'title': "Регистрация", 'url_name': 'register'}
 ]
 
 
@@ -20,3 +20,4 @@ class DataMixin:
         cart_product_form = CartAddProductForm()
         context['cart_product_form'] = cart_product_form
         return context
+

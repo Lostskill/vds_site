@@ -6,7 +6,7 @@ from .tasks import order_created
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
 from .models import Order
-
+from main.utils import menu
 
 @staff_member_required
 def admin_order_detail(request, order_id):
@@ -32,10 +32,10 @@ def order_create(request):
             # запуск асинхронной задачи
             order_created(order.id)
             return render(request, 'orders/order/created.html',
-                          {'order': order})
+                          {'order': order,'menu':menu})
     else:
         form = OrderCreateForm
     return render(request, 'orders/order/create.html',
-                  {'cart': cart, 'form': form})
+                  {'cart': cart, 'form': form, 'menu':menu})
 
 

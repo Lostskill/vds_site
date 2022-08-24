@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import login
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView ,CreateView, TemplateView
+from django.views.generic import ListView, DetailView ,CreateView
 from main.models import *
 from django.contrib.auth.views import LoginView
 from .utils import *
@@ -19,12 +19,13 @@ class SortingStaff:
     def get_videomemory(self):
         return VideoCard.objects.filter().values("video_memory").distinct()
 
+
 class Main(SortingStaff ,DataMixin, ListView):
 
     model = VideoCard
     
     template_name = 'main/index.html'
-    context_object_name = 'videocard_list'
+    context_object_name = 'videocard'
     
 
     def get_context_data(self,*,objects_list=None,**kwargs): 
@@ -33,12 +34,15 @@ class Main(SortingStaff ,DataMixin, ListView):
 
         
         return dict(list(context.items()) + list(c_def.items()))
+    #    return context
+    #def get_queryset(self):
+    #    return super().get_queryset().filter(user_id=self.request.user.id)
 
 class RubList(SortingStaff,ListView,DataMixin):
     model = VideoCard
 
     template_name = 'main/index.html'
-    context_object_name = 'videocard_list'
+    context_object_name = 'videocard'
 
     def get_queryset(self):
         return VideoCard.objects.filter(rub_key__slug_field=self.kwargs['cat_slug'])
@@ -47,8 +51,9 @@ class RubList(SortingStaff,ListView,DataMixin):
         context = super().get_context_data(**kwargs)
        
 #        c = Rub.objects.get(slug_field = self.kwargs['cat_slug'])
-        c_def = self.get_rub_data(rub_selected = context['videocard_list'][0].rub_key)
+        c_def = self.get_rub_data(rub_selected = context['videocard'][0].rub_key)
         return dict(list(context.items()) + list(c_def.items()))
+    #    return context
         
 class ShowCard(SortingStaff,DetailView,DataMixin):
     model = VideoCard
@@ -62,7 +67,7 @@ class ShowCard(SortingStaff,DetailView,DataMixin):
         c_def = self.get_rub_data()
         return dict(list(context.items()) + list(c_def.items()))
 
-class LoginUser(LoginView,DataMixin):
+class LoginUser(SortingStaff,LoginView,DataMixin):
     form_class = LoginUserForm
     template_name = 'main/login.html'
 
@@ -74,7 +79,7 @@ class LoginUser(LoginView,DataMixin):
     def get_success_url(self):
         return reverse_lazy('main')    
 
-class RegisterUser(DataMixin, CreateView):
+class RegisterUser(SortingStaff,DataMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'main/register.html'
     success_url = reverse_lazy('login')
@@ -104,11 +109,5 @@ class FilterCard(SortingStaff,ListView,DataMixin):
         c_def = self.get_rub_data()
         return dict(list(context.items()) + list(c_def.items()))
 
-class About(TemplateView,SortingStaff,DataMixin):
-    template_name ='main/about.html'
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_rub_data()
-        return dict(list(context.items()) + list(c_def.items()))        
-    
-    
+def about(request):
+        return render(request, 'main/about', {'menu': menu})

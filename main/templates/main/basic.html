@@ -5,7 +5,7 @@
         <meta charset="utf-8"/>
         <head>
             <title>VDS - Магазин по продажам видеокарт</title>
-            <link type="text/css" href="{% static 'main/css/style.css' %}" rel="stylesheet"/>
+
         </head>
         <div class = "menu">
         {% block menu %}
@@ -38,33 +38,6 @@
             </a>
 
     {% endwith %}
-    <div class='sort'>
-        <form action='{% url 'filter' %}' method='get'>
-            <div class='chip_header'>   
-                <p>Графический процессор</p>
-                {% for chips in view.get_chip %}
-                    <li class='chip_sort'>
-                    <input type='checkbox' class='checked' name='chip' value="{{ chips.chip }}">
-                    <span class='span chip_sort'>{{ chips.chip }} </span>
-                {% endfor %}
-            </div>        
-            <p>Производитель</p>
-        {% for manu in view.get_manufactors %}
-            <li class='manu_sort'>
-                <input type='checkbox' class='checked' name='manufacturer' value="{{ manu.manufacturer}}">
-                <span class='span chip_sort'>{{ manu.manufacturer }} </span>
-        {% endfor %}
-
-        <p>Видеопамять</p>
-        {% for vmemory in view.get_videomemory %}
-            <li class='chip_sort'>
-                <input type='checkbox' class='checked' name='video_memory' value="{{ vmemory.video_memory }}">
-                <span class='span chip_sort'>{{ vmemory.video_memory }} </span>
-        {% endfor %}    
-            <button type='submit'>Найти</button>
-        </form>
-    </div>
-
 </div>
         
         <div>
